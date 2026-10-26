@@ -1,0 +1,9 @@
+name: metaforge_enterprise_dw
+version: 1.0.1
+config-version: 2
+profile: metaforge_snowflake
+model-paths:
+- models
+models:
+  metaforge_enterprise_dw:
+    +materialized: table

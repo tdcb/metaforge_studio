@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
+
+/* Custom dark theme scrollbars & React Flow overrides */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+.react-flow__attribution {
+  display: none !important;
+}
+
+.react-flow__controls {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid #334155 !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.react-flow__controls-button {
+  background: #0f172a !important;
+  border-bottom: 1px solid #1e293b !important;
+  fill: #cbd5e1 !important;
+}
+
+.react-flow__controls-button:hover {
+  background: #1e293b !important;
+}
+
+.react-flow__minimap {
+  background-color: #0f172a !important;
+  border: 1px solid #334155 !important;
+  border-radius: 8px !important;
+}

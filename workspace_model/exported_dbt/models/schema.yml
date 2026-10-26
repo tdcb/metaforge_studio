@@ -1,0 +1,1603 @@
+version: 2
+models:
+- name: dim_agent_broker
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Agent Broker
+    subject_area: Core
+    stereotype: DIM_SCD1
+    grain: ''
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: BRKR_ID
+    description: Broker Identifier
+    meta:
+      logical_name: Broker Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: BRKR_FULL_NM
+    description: Broker Full Name
+    meta:
+      logical_name: Broker Full Name
+      pii_classification: RESTRICTED_PII
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: BRKR_EMAIL_ADDR
+    description: Broker Email Address
+    meta:
+      logical_name: Broker Email Address
+      pii_classification: RESTRICTED_PII
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: BRKR_REGION_CD
+    description: Broker Region Code
+    meta:
+      logical_name: Broker Region Code
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: COMMISSION_RATE_PCT
+    description: Commission Rate Percentage
+    meta:
+      logical_name: Commission Rate Percentage
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: ACTIVE_IND
+    description: Active Indicator
+    meta:
+      logical_name: Active Indicator
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+- name: dim_customer
+  description: Conformed master customer dimension storing verified corporate and
+    retail customer profiles.
+  meta:
+    logical_name: Customer Dimension
+    subject_area: Core
+    stereotype: DIM_SCD1
+    grain: ''
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: CUST_ID
+    description: Unique surrogate primary key indexing each customer record across
+      all enterprise channels.
+    meta:
+      logical_name: Customer Identifier
+      pii_classification: NONE
+      metadata_status: STEWARD_VERIFIED
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: CUST_FULL_NM
+    description: Legal registered name or corporate trade name of the customer.
+    meta:
+      logical_name: Customer Full Name
+      pii_classification: RESTRICTED_PII
+      metadata_status: STEWARD_VERIFIED
+      domain: Custom
+    tests:
+    - not_null
+  - name: CUST_EMAIL_ADDR
+    description: Primary corporate email address used for electronic billing and multi-factor
+      authentication.
+    meta:
+      logical_name: Customer Email Address
+      pii_classification: RESTRICTED_PII
+      metadata_status: STEWARD_VERIFIED
+      domain: Custom
+  - name: TAX_ID_NBR
+    description: Tax Identifier Number
+    meta:
+      logical_name: Tax Identifier Number
+      pii_classification: RESTRICTED_PII
+      metadata_status: DRAFT
+      domain: Custom
+  - name: CUST_STAT_CD
+    description: Customer Status Code
+    meta:
+      logical_name: Customer Status Code
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: REC_CRTD_TS
+    description: Record Created Timestamp
+    meta:
+      logical_name: Record Created Timestamp
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+- name: dim_date
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Date
+    subject_area: Core
+    stereotype: DIM_SCD1
+    grain: ''
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: DATE_KEY
+    description: Date Key
+    meta:
+      logical_name: Date Key
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: CALENDAR_DATE
+    description: Calendar Date
+    meta:
+      logical_name: Calendar Date
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: DAY_NAME
+    description: Day Name
+    meta:
+      logical_name: Day Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: MONTH_NUMBER
+    description: Month Number
+    meta:
+      logical_name: Month Number
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: MONTH_NAME
+    description: Month Name
+    meta:
+      logical_name: Month Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: CALENDAR_QUARTER
+    description: Calendar Quarter
+    meta:
+      logical_name: Calendar Quarter
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: CALENDAR_YEAR
+    description: Calendar Year
+    meta:
+      logical_name: Calendar Year
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: IS_WEEKEND_IND
+    description: Is Weekend Indicator
+    meta:
+      logical_name: Is Weekend Indicator
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+- name: dim_insurance_policy
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Insurance Policy
+    subject_area: Core
+    stereotype: DIM_SCD1
+    grain: ''
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: PLCY_ID
+    description: Policy Identifier
+    meta:
+      logical_name: Policy Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: PLCY_NBR
+    description: Policy Number
+    meta:
+      logical_name: Policy Number
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: CUST_ID
+    description: Customer Identifier
+    meta:
+      logical_name: Customer Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+    - relationships:
+        to: ref('dim_customer')
+        field: CUST_ID
+  - name: BRKR_ID
+    description: Broker Identifier
+    meta:
+      logical_name: Broker Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - relationships:
+        to: ref('dim_agent_broker')
+        field: BRKR_ID
+  - name: CVRG_TYP_CD
+    description: Coverage Type Code
+    meta:
+      logical_name: Coverage Type Code
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: ANNUAL_PREM_AMT
+    description: Annual Premium Amount
+    meta:
+      logical_name: Annual Premium Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: PLCY_EFF_DT
+    description: Policy Effective Date
+    meta:
+      logical_name: Policy Effective Date
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: PLCY_EXP_DT
+    description: Policy Expiration Date
+    meta:
+      logical_name: Policy Expiration Date
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+- name: dim_product
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Product
+    subject_area: Core
+    stereotype: DIM_SCD1
+    grain: ''
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: PRODUCT_KEY
+    description: Product Key
+    meta:
+      logical_name: Product Key
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: PRODUCT_SKU_NK
+    description: Product Sku Nk
+    meta:
+      logical_name: Product Sku Nk
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: PRODUCT_NAME
+    description: Product Name
+    meta:
+      logical_name: Product Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: CATEGORY_NAME
+    description: Category Name
+    meta:
+      logical_name: Category Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: BRAND_NAME
+    description: Brand Name
+    meta:
+      logical_name: Brand Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: UNIT_COST_AMT
+    description: Unit Cost Amount
+    meta:
+      logical_name: Unit Cost Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: LIST_PRICE_AMT
+    description: List Price Amount
+    meta:
+      logical_name: List Price Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: MARGIN_PCT
+    description: Margin Percentage
+    meta:
+      logical_name: Margin Percentage
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: CURRENT_INVENTORY_QTY
+    description: Current Inventory Quantity
+    meta:
+      logical_name: Current Inventory Quantity
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+- name: fct_claim_transaction
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Claim Transaction
+    subject_area: Core
+    stereotype: FCT_TRANSACTION
+    grain: ''
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: CLM_TXN_ID
+    description: Claim Transaction Identifier
+    meta:
+      logical_name: Claim Transaction Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: PLCY_ID
+    description: Policy Identifier
+    meta:
+      logical_name: Policy Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+    - relationships:
+        to: ref('dim_insurance_policy')
+        field: PLCY_ID
+  - name: CUST_ID
+    description: Customer Identifier
+    meta:
+      logical_name: Customer Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+    - relationships:
+        to: ref('dim_customer')
+        field: CUST_ID
+  - name: CLM_RPTD_DT
+    description: Claim Reported Date
+    meta:
+      logical_name: Claim Reported Date
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: CLM_LOSS_AMT
+    description: Claim Loss Amount
+    meta:
+      logical_name: Claim Loss Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: CLM_PAID_AMT
+    description: Claim Paid Amount
+    meta:
+      logical_name: Claim Paid Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: CLM_STAT_CD
+    description: Claim Status Code
+    meta:
+      logical_name: Claim Status Code
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+- name: fct_orders
+  description: Enterprise Core business dataset representing Orders Fact Table. One
+    atomic transaction event record per Orders Fact Table identified by (Order Key).
+    Integrates source relational data from upstream Customer Dimension, Date, Customer
+    Dimension, Date.
+  meta:
+    logical_name: Orders Fact Table
+    subject_area: Core
+    stereotype: FCT_TRANSACTION
+    grain: One atomic transaction event record per Orders Fact Table identified by
+      (Order Key).
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: SOX_7YR
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: ORDER_KEY
+    description: 'Unique primary key identifier representing the order key that uniquely
+      distinguishes each individual orders fact table record. Mandatory non-nullable
+      attribute with 100% data completeness observed. Standard domain values include:
+      [''1'', ''2'', ''3'', ''4''].'
+    meta:
+      logical_name: Order Key
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: ORDER_ID_NK
+    description: 'Core business attribute capturing the order identifier nk for each
+      orders fact table. Mandatory non-nullable attribute with 100% data completeness
+      observed. Candidate natural business key with 100% distinct values observed.
+      Standard domain values include: [''5001'', ''5002'', ''5003'', ''5004''].'
+    meta:
+      logical_name: Order Identifier Nk
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+  - name: CUSTOMER_KEY
+    description: 'Relational foreign key reference representing the customer key linking
+      this orders fact table to the associated parent customer entity. Mandatory non-nullable
+      attribute with 100% data completeness observed. Candidate natural business key
+      with 100% distinct values observed. Standard domain values include: [''1001'',
+      ''1002'', ''1003'', ''1004''].'
+    meta:
+      logical_name: Customer Key
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+    - relationships:
+        to: ref('dim_customer')
+        field: CUST_ID
+  - name: ORDER_DATE_KEY
+    description: 'Relational foreign key reference representing the order date key
+      linking this orders fact table to the associated parent date entity. Mandatory
+      non-nullable attribute with 100% data completeness observed. Candidate natural
+      business key with 100% distinct values observed. Standard domain values include:
+      [''20250115'', ''20250122'', ''20250204'', ''20250218''].'
+    meta:
+      logical_name: Order Date Key
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+    - relationships:
+        to: ref('dim_date')
+        field: DATE_KEY
+  - name: ORDER_STATUS_CD
+    description: 'Standardized enterprise classification code categorizing the order
+      status code for each orders fact table. Mandatory non-nullable attribute with
+      100% data completeness observed. Standard domain values include: [''COMPLETED'',
+      ''PENDING''].'
+    meta:
+      logical_name: Order Status Code
+      pii_classification: INTERNAL
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+  - name: PAYMENT_METHOD_CD
+    description: 'Standardized enterprise classification code categorizing the payment
+      method code for each orders fact table. Mandatory non-nullable attribute with
+      100% data completeness observed. Standard domain values include: [''Credit Card'',
+      ''Ach Transfer'', ''Wire Transfer''].'
+    meta:
+      logical_name: Payment Method Code
+      pii_classification: INTERNAL
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+  - name: SUBTOTAL_AMT
+    description: 'Monetary financial measure recording the subtotal amount associated
+      with each orders fact table. Mandatory non-nullable attribute with 100% data
+      completeness observed. Candidate natural business key with 100% distinct values
+      observed. Standard domain values include: [''4899'', ''1998'', ''249.5'', ''6398''].'
+    meta:
+      logical_name: Subtotal Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+  - name: TAX_AMT
+    description: 'Monetary financial measure recording the tax amount associated with
+      each orders fact table. Mandatory non-nullable attribute with 100% data completeness
+      observed. Candidate natural business key with 100% distinct values observed.
+      Standard domain values include: [''391.92'', ''159.84'', ''19.96'', ''511.84''].'
+    meta:
+      logical_name: Tax Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+  - name: SHIPPING_AMT
+    description: 'Monetary financial measure recording the shipping amount associated
+      with each orders fact table. Mandatory non-nullable attribute with 100% data
+      completeness observed. Candidate natural business key with 100% distinct values
+      observed. Standard domain values include: [''45'', ''0'', ''15'', ''85''].'
+    meta:
+      logical_name: Shipping Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+  - name: TOTAL_ORDER_AMT
+    description: 'Monetary financial measure recording the total order amount associated
+      with each orders fact table. Mandatory non-nullable attribute with 100% data
+      completeness observed. Candidate natural business key with 100% distinct values
+      observed. Standard domain values include: [''5335.92'', ''2157.84'', ''284.46'',
+      ''6994.84''].'
+    meta:
+      logical_name: Total Order Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+  - name: ORDER_ITEM_COUNT
+    description: 'Discrete numeric count measuring the total order item count for
+      each orders fact table. Mandatory non-nullable attribute with 100% data completeness
+      observed. Standard domain values include: [''1'', ''2''].'
+    meta:
+      logical_name: Order Item Count
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+- name: fct_order_items
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Order Items
+    subject_area: Core
+    stereotype: FCT_TRANSACTION
+    grain: ''
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: ORDER_ITEM_KEY
+    description: Order Item Key
+    meta:
+      logical_name: Order Item Key
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: ORDER_KEY
+    description: Order Key
+    meta:
+      logical_name: Order Key
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: PRODUCT_KEY
+    description: Product Key
+    meta:
+      logical_name: Product Key
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+    - relationships:
+        to: ref('dim_product')
+        field: PRODUCT_KEY
+  - name: CUSTOMER_KEY
+    description: Customer Key
+    meta:
+      logical_name: Customer Key
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+    - relationships:
+        to: ref('dim_customer')
+        field: CUST_ID
+  - name: ITEM_QUANTITY
+    description: Item Quantity
+    meta:
+      logical_name: Item Quantity
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: UNIT_SELLING_PRICE_AMT
+    description: Unit Selling Price Amount
+    meta:
+      logical_name: Unit Selling Price Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: DISCOUNT_AMT
+    description: Discount Amount
+    meta:
+      logical_name: Discount Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: NET_SALES_AMT
+    description: Net Sales Amount
+    meta:
+      logical_name: Net Sales Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: GROSS_PROFIT_AMT
+    description: Gross Profit Amount
+    meta:
+      logical_name: Gross Profit Amount
+      pii_classification: CONFIDENTIAL
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+- name: stg_customers
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Customers
+    subject_area: Staging
+    stereotype: ODS_STAGING
+    grain: ''
+    dbt_layer: staging
+    materialized: view
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: SRC_CUSTOMER_ID
+    description: Source Customer Identifier
+    meta:
+      logical_name: Source Customer Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: FIRST_NAME
+    description: First Name
+    meta:
+      logical_name: First Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: LAST_NAME
+    description: Last Name
+    meta:
+      logical_name: Last Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: EMAIL
+    description: Email
+    meta:
+      logical_name: Email
+      pii_classification: RESTRICTED_PII
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: PHONE
+    description: Phone
+    meta:
+      logical_name: Phone
+      pii_classification: RESTRICTED_PII
+      metadata_status: DRAFT
+      domain: Custom
+  - name: CITY
+    description: City
+    meta:
+      logical_name: City
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: COUNTRY_CODE
+    description: Country Code
+    meta:
+      logical_name: Country Code
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: REGISTRATION_DATE
+    description: Registration Date
+    meta:
+      logical_name: Registration Date
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: STATUS
+    description: Status
+    meta:
+      logical_name: Status
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: INGESTION_TIMESTAMP
+    description: Ingestion Timestamp
+    meta:
+      logical_name: Ingestion Timestamp
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+- name: stg_orders
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Orders
+    subject_area: Staging
+    stereotype: ODS_STAGING
+    grain: ''
+    dbt_layer: staging
+    materialized: view
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: SRC_ORDER_ID
+    description: Source Order Identifier
+    meta:
+      logical_name: Source Order Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: SRC_CUSTOMER_ID
+    description: Source Customer Identifier
+    meta:
+      logical_name: Source Customer Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: ORDER_DATETIME
+    description: Order Datetime
+    meta:
+      logical_name: Order Datetime
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: ORDER_STATUS
+    description: Order Status
+    meta:
+      logical_name: Order Status
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: PAYMENT_METHOD
+    description: Payment Method
+    meta:
+      logical_name: Payment Method
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: SUBTOTAL_AMOUNT
+    description: Subtotal Amount
+    meta:
+      logical_name: Subtotal Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: TAX_AMOUNT
+    description: Tax Amount
+    meta:
+      logical_name: Tax Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: SHIPPING_AMOUNT
+    description: Shipping Amount
+    meta:
+      logical_name: Shipping Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: TOTAL_AMOUNT
+    description: Total Amount
+    meta:
+      logical_name: Total Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: INGESTION_TIMESTAMP
+    description: Ingestion Timestamp
+    meta:
+      logical_name: Ingestion Timestamp
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+- name: stg_order_items
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Order Items
+    subject_area: Staging
+    stereotype: ODS_STAGING
+    grain: ''
+    dbt_layer: staging
+    materialized: view
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: SRC_ITEM_ID
+    description: Source Item Identifier
+    meta:
+      logical_name: Source Item Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: SRC_ORDER_ID
+    description: Source Order Identifier
+    meta:
+      logical_name: Source Order Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: SRC_PRODUCT_SKU
+    description: Source Product Sku
+    meta:
+      logical_name: Source Product Sku
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: QUANTITY
+    description: Quantity
+    meta:
+      logical_name: Quantity
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: UNIT_PRICE
+    description: Unit Price
+    meta:
+      logical_name: Unit Price
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: DISCOUNT_PERCENT
+    description: Discount Percent
+    meta:
+      logical_name: Discount Percent
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: LINE_TOTAL
+    description: Line Total
+    meta:
+      logical_name: Line Total
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: INGESTION_TIMESTAMP
+    description: Ingestion Timestamp
+    meta:
+      logical_name: Ingestion Timestamp
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+- name: stg_products
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Products
+    subject_area: Staging
+    stereotype: ODS_STAGING
+    grain: ''
+    dbt_layer: staging
+    materialized: view
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: SRC_PRODUCT_SKU
+    description: Source Product Sku
+    meta:
+      logical_name: Source Product Sku
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: PRODUCT_NAME
+    description: Product Name
+    meta:
+      logical_name: Product Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: CATEGORY
+    description: Category
+    meta:
+      logical_name: Category
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: BRAND
+    description: Brand
+    meta:
+      logical_name: Brand
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: UNIT_COST
+    description: Unit Cost
+    meta:
+      logical_name: Unit Cost
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: LIST_PRICE
+    description: List Price
+    meta:
+      logical_name: List Price
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: INVENTORY_COUNT
+    description: Inventory Count
+    meta:
+      logical_name: Inventory Count
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: SUPPLIER_NAME
+    description: Supplier Name
+    meta:
+      logical_name: Supplier Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: INGESTION_TIMESTAMP
+    description: Ingestion Timestamp
+    meta:
+      logical_name: Ingestion Timestamp
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+- name: stg_web_clicks
+  description: Reverse-engineered Table from snowflake DDL
+  meta:
+    logical_name: Web Clicks
+    subject_area: Staging
+    stereotype: ODS_STAGING
+    grain: ''
+    dbt_layer: staging
+    materialized: view
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: EVENT_ID
+    description: Event Identifier
+    meta:
+      logical_name: Event Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: SESSION_ID
+    description: Session Identifier
+    meta:
+      logical_name: Session Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: SRC_CUSTOMER_ID
+    description: Source Customer Identifier
+    meta:
+      logical_name: Source Customer Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: PAGE_PATH
+    description: Page Path
+    meta:
+      logical_name: Page Path
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: EVENT_NAME
+    description: Event Name
+    meta:
+      logical_name: Event Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: DEVICE_TYPE
+    description: Device Type
+    meta:
+      logical_name: Device Type
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - not_null
+  - name: EVENT_TIMESTAMP
+    description: Event Timestamp
+    meta:
+      logical_name: Event Timestamp
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+- name: mart_customer_lifetime_value
+  description: Reverse-engineered View parsed via SQLGlot AST (3 upstream source tables)
+  meta:
+    logical_name: Mart Customer Lifetime Value
+    subject_area: Consumption
+    stereotype: ANALYTICAL_VIEW
+    grain: ''
+    dbt_layer: mart
+    materialized: view
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: CUSTOMER_KEY
+    description: 'Projected view expression: c.Customer Identifier'
+    meta:
+      logical_name: Customer Key
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - relationships:
+        to: ref('dim_date')
+        field: DATE_KEY
+  - name: CUSTOMER_NAME
+    description: 'Projected view expression: c.Customer Full Name'
+    meta:
+      logical_name: Customer Name
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: CUSTOMER_STATUS
+    description: 'Projected view expression: c.Customer Status Code'
+    meta:
+      logical_name: Customer Status
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: LIFETIME_ORDERS_COUNT
+    description: 'Projected view expression: COUNT(o.Order Key)'
+    meta:
+      logical_name: Lifetime Orders Count
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: FIRST_PURCHASE_DATE
+    description: 'Projected view expression: Minute(d.Calendar Date)'
+    meta:
+      logical_name: First Purchase Date
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: LATEST_PURCHASE_DATE
+    description: 'Projected view expression: Maximum(d.Calendar Date)'
+    meta:
+      logical_name: Latest Purchase Date
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: LIFETIME_NET_SPEND_AMT
+    description: 'Projected view expression: COALESCE(SUM(o.Total Order Amount), 0.0)'
+    meta:
+      logical_name: Lifetime Net Spend Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: AVG_ORDER_BASKET_AMT
+    description: 'Projected view expression: ROUND(COALESCE(Average(o.Total Order
+      Amount), 0.0), 2)'
+    meta:
+      logical_name: Average Order Basket Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+- name: mart_monthly_revenue_kpis
+  description: Reverse-engineered View parsed via SQLGlot AST (2 upstream source tables)
+  meta:
+    logical_name: Mart Monthly Revenue Key Performance Indicators
+    subject_area: Consumption
+    stereotype: ANALYTICAL_VIEW
+    grain: ''
+    dbt_layer: mart
+    materialized: view
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: REPORTING_YEAR
+    description: 'Projected view expression: d.Calendar Year'
+    meta:
+      logical_name: Reporting Year
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - relationships:
+        to: ref('dim_date')
+        field: DATE_KEY
+  - name: REPORTING_MONTH
+    description: 'Projected view expression: d.Month Name'
+    meta:
+      logical_name: Reporting Month
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: TOTAL_ORDERS_COUNT
+    description: 'Projected view expression: COUNT(o.Order Key)'
+    meta:
+      logical_name: Total Orders Count
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: GROSS_REVENUE_AMT
+    description: 'Projected view expression: SUM(o.Total Order Amount)'
+    meta:
+      logical_name: Gross Revenue Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: TOTAL_TAX_AMT
+    description: 'Projected view expression: SUM(o.Tax Amount)'
+    meta:
+      logical_name: Total Tax Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: TOTAL_SHIPPING_AMT
+    description: 'Projected view expression: SUM(o.Shipping Amount)'
+    meta:
+      logical_name: Total Shipping Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: ACTIVE_BUYING_CUSTOMERS
+    description: 'Projected view expression: COUNT(DISTINCT o.Customer Key)'
+    meta:
+      logical_name: Active Buying Customers
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+- name: mart_product_category_performance
+  description: Reverse-engineered View parsed via SQLGlot AST (2 upstream source tables)
+  meta:
+    logical_name: Mart Product Category Performance
+    subject_area: Consumption
+    stereotype: ANALYTICAL_VIEW
+    grain: ''
+    dbt_layer: mart
+    materialized: view
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: PRODUCT_CATEGORY
+    description: 'Projected view expression: p.Category Name'
+    meta:
+      logical_name: Product Category
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - relationships:
+        to: ref('dim_product')
+        field: PRODUCT_KEY
+  - name: ITEMS_SOLD_COUNT
+    description: 'Projected view expression: COUNT(oi.Order Item Key)'
+    meta:
+      logical_name: Items Sold Count
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: CATEGORY_NET_SALES_AMT
+    description: 'Projected view expression: SUM(oi.Net Sales Amount)'
+    meta:
+      logical_name: Category Net Sales Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: CATEGORY_GROSS_PROFIT_AMT
+    description: 'Projected view expression: SUM(oi.Gross Profit Amount)'
+    meta:
+      logical_name: Category Gross Profit Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: AVG_SELLING_PRICE_AMT
+    description: 'Projected view expression: ROUND(Average(oi.Unit Selling Price Amount),
+      2)'
+    meta:
+      logical_name: Average Selling Price Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+- name: vw_customer_claim_summary
+  description: Reverse-engineered View parsed via SQLGlot AST (3 upstream source tables)
+  meta:
+    logical_name: Customer Claim Summary
+    subject_area: Consumption
+    stereotype: ANALYTICAL_VIEW
+    grain: ''
+    dbt_layer: mart
+    materialized: view
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: CUST_ID
+    description: 'Projected view expression: c.Customer Identifier'
+    meta:
+      logical_name: Customer Identifier
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - relationships:
+        to: ref('fct_claim_transaction')
+        field: CLM_TXN_ID
+  - name: CUST_FULL_NM
+    description: 'Projected view expression: c.Customer Full Name'
+    meta:
+      logical_name: Customer Full Name
+      pii_classification: RESTRICTED_PII
+      metadata_status: DRAFT
+      domain: Custom
+  - name: PLCY_NBR
+    description: 'Projected view expression: p.Policy Number'
+    meta:
+      logical_name: Policy Number
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: TOTAL_CLM_CNT
+    description: 'Projected view expression: COUNT(f.Claim Transaction Identifier)'
+    meta:
+      logical_name: Total Claim Count
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+  - name: TOTAL_CLM_PAID_AMT
+    description: 'Projected view expression: SUM(f.Claim Paid Amount)'
+    meta:
+      logical_name: Total Claim Paid Amount
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+- name: stg_enterprise_accounts
+  description: Admin authoritative description on E0
+  meta:
+    logical_name: Enterprise Accounts
+    subject_area: Spreadsheets
+    stereotype: DIM_SCD1
+    grain: ''
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: CUSTOMER_ID
+    description: 'Unique primary key identifier representing the customer identifier
+      uniquely identifying records. Mandatory non-nullable field. Categorical domain
+      observed with values: [''101'', ''102'', ''103''].'
+    meta:
+      logical_name: Customer Identifier
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: CUSTOMER_NAME
+    description: 'Operational business attribute capturing the customer name. Mandatory
+      non-nullable field. Categorical domain observed with values: [''Acme Corp'',
+      ''Gamma Inc'', ''Beta LLC''].'
+    meta:
+      logical_name: Customer Name
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+  - name: ANNUAL_SPEND
+    description: 'Operational business attribute capturing the annual spend. Mandatory
+      non-nullable field. Categorical domain observed with values: [''14500.50'',
+      ''89000.00'', ''3200.00''].'
+    meta:
+      logical_name: Annual Spend
+      pii_classification: CONFIDENTIAL
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+  - name: IS_VIP
+    description: 'Operational business attribute capturing the is vip. Mandatory non-nullable
+      field. Categorical domain observed with values: [''TRUE'', ''FALSE''].'
+    meta:
+      logical_name: Is Vip
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+  - name: SIGNUP_DATE
+    description: 'Operational business attribute capturing the signup date. Mandatory
+      non-nullable field. Categorical domain observed with values: [''2024-02-20'',
+      ''2024-03-05'', ''2024-01-15''].'
+    meta:
+      logical_name: Signup Date
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+- name: stg_suppliers_catalog
+  description: Architect non-conflicting description on E1
+  meta:
+    logical_name: Suppliers Catalog
+    subject_area: Procurement
+    stereotype: DIM_SCD1
+    grain: ''
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: SUPPLIER_ID
+    description: 'Unique primary key identifier representing the supplier identifier
+      uniquely identifying records. Mandatory non-nullable field. Categorical domain
+      observed with values: [''2'', ''1''].'
+    meta:
+      logical_name: Supplier Identifier
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - unique
+    - not_null
+  - name: SUPPLIER_NAME
+    description: 'Operational business attribute capturing the supplier name. Mandatory
+      non-nullable field. Categorical domain observed with values: [''Pacific Goods'',
+      ''Apex Supply''].'
+    meta:
+      logical_name: Supplier Name
+      pii_classification: NONE
+      metadata_status: AUTO_GENERATED
+      domain: Custom
+    tests:
+    - not_null
+- name: dim_reinsurance_treaty
+  description: Tracks quota share and excess of loss reinsurance treaties.
+  meta:
+    logical_name: Reinsurance Treaty Dimension
+    subject_area: Core
+    stereotype: DIM_SCD1
+    grain: ''
+    dbt_layer: mart
+    materialized: table
+    owner: Enterprise Data Architecture
+    freshness_sla_hours: 24
+    retention_framework: NONE
+    retention_days_hot: 365
+    retention_days_archive: 2555
+  columns:
+  - name: TREATY_SK
+    description: Primary surrogate key for reinsurance treaty.
+    meta:
+      logical_name: Treaty Surrogate Key
+      pii_classification: NONE
+      metadata_status: DRAFT
+      domain: Custom
+    tests:
+    - unique
+    - not_null

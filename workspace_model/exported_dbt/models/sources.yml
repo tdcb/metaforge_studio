@@ -1,0 +1,287 @@
+version: 2
+sources:
+- name: core
+  database: ENTERPRISE_RAW_DB
+  schema: CORE
+  description: Upstream raw source tables in schema CORE
+  tables:
+  - name: stg_customers
+    identifier: STG_CUSTOMERS
+    description: Reverse-engineered Table from snowflake DDL
+    loaded_at_field: REGISTRATION_DATE
+    freshness:
+      warn_after:
+        count: 12
+        period: hour
+      error_after:
+        count: 24
+        period: hour
+    columns:
+    - name: SRC_CUSTOMER_ID
+      description: Source Customer Identifier column
+      meta:
+        logical_name: Source Customer Identifier
+        pii_classification: NONE
+    - name: FIRST_NAME
+      description: First Name column
+      meta:
+        logical_name: First Name
+        pii_classification: NONE
+    - name: LAST_NAME
+      description: Last Name column
+      meta:
+        logical_name: Last Name
+        pii_classification: NONE
+    - name: EMAIL
+      description: Email column
+      meta:
+        logical_name: Email
+        pii_classification: RESTRICTED_PII
+    - name: PHONE
+      description: Phone column
+      meta:
+        logical_name: Phone
+        pii_classification: RESTRICTED_PII
+    - name: CITY
+      description: City column
+      meta:
+        logical_name: City
+        pii_classification: NONE
+    - name: COUNTRY_CODE
+      description: Country Code column
+      meta:
+        logical_name: Country Code
+        pii_classification: NONE
+    - name: REGISTRATION_DATE
+      description: Registration Date column
+      meta:
+        logical_name: Registration Date
+        pii_classification: NONE
+    - name: STATUS
+      description: Status column
+      meta:
+        logical_name: Status
+        pii_classification: NONE
+    - name: INGESTION_TIMESTAMP
+      description: Ingestion Timestamp column
+      meta:
+        logical_name: Ingestion Timestamp
+        pii_classification: NONE
+  - name: stg_orders
+    identifier: STG_ORDERS
+    description: Reverse-engineered Table from snowflake DDL
+    loaded_at_field: ORDER_DATETIME
+    freshness:
+      warn_after:
+        count: 12
+        period: hour
+      error_after:
+        count: 24
+        period: hour
+    columns:
+    - name: SRC_ORDER_ID
+      description: Source Order Identifier column
+      meta:
+        logical_name: Source Order Identifier
+        pii_classification: NONE
+    - name: SRC_CUSTOMER_ID
+      description: Source Customer Identifier column
+      meta:
+        logical_name: Source Customer Identifier
+        pii_classification: NONE
+    - name: ORDER_DATETIME
+      description: Order Datetime column
+      meta:
+        logical_name: Order Datetime
+        pii_classification: NONE
+    - name: ORDER_STATUS
+      description: Order Status column
+      meta:
+        logical_name: Order Status
+        pii_classification: NONE
+    - name: PAYMENT_METHOD
+      description: Payment Method column
+      meta:
+        logical_name: Payment Method
+        pii_classification: NONE
+    - name: SUBTOTAL_AMOUNT
+      description: Subtotal Amount column
+      meta:
+        logical_name: Subtotal Amount
+        pii_classification: NONE
+    - name: TAX_AMOUNT
+      description: Tax Amount column
+      meta:
+        logical_name: Tax Amount
+        pii_classification: NONE
+    - name: SHIPPING_AMOUNT
+      description: Shipping Amount column
+      meta:
+        logical_name: Shipping Amount
+        pii_classification: NONE
+    - name: TOTAL_AMOUNT
+      description: Total Amount column
+      meta:
+        logical_name: Total Amount
+        pii_classification: NONE
+    - name: INGESTION_TIMESTAMP
+      description: Ingestion Timestamp column
+      meta:
+        logical_name: Ingestion Timestamp
+        pii_classification: NONE
+  - name: stg_order_items
+    identifier: STG_ORDER_ITEMS
+    description: Reverse-engineered Table from snowflake DDL
+    loaded_at_field: INGESTED_TS
+    freshness:
+      warn_after:
+        count: 12
+        period: hour
+      error_after:
+        count: 24
+        period: hour
+    columns:
+    - name: SRC_ITEM_ID
+      description: Source Item Identifier column
+      meta:
+        logical_name: Source Item Identifier
+        pii_classification: NONE
+    - name: SRC_ORDER_ID
+      description: Source Order Identifier column
+      meta:
+        logical_name: Source Order Identifier
+        pii_classification: NONE
+    - name: SRC_PRODUCT_SKU
+      description: Source Product Sku column
+      meta:
+        logical_name: Source Product Sku
+        pii_classification: NONE
+    - name: QUANTITY
+      description: Quantity column
+      meta:
+        logical_name: Quantity
+        pii_classification: NONE
+    - name: UNIT_PRICE
+      description: Unit Price column
+      meta:
+        logical_name: Unit Price
+        pii_classification: NONE
+    - name: DISCOUNT_PERCENT
+      description: Discount Percent column
+      meta:
+        logical_name: Discount Percent
+        pii_classification: NONE
+    - name: LINE_TOTAL
+      description: Line Total column
+      meta:
+        logical_name: Line Total
+        pii_classification: NONE
+    - name: INGESTION_TIMESTAMP
+      description: Ingestion Timestamp column
+      meta:
+        logical_name: Ingestion Timestamp
+        pii_classification: NONE
+  - name: stg_products
+    identifier: STG_PRODUCTS
+    description: Reverse-engineered Table from snowflake DDL
+    loaded_at_field: INGESTED_TS
+    freshness:
+      warn_after:
+        count: 12
+        period: hour
+      error_after:
+        count: 24
+        period: hour
+    columns:
+    - name: SRC_PRODUCT_SKU
+      description: Source Product Sku column
+      meta:
+        logical_name: Source Product Sku
+        pii_classification: NONE
+    - name: PRODUCT_NAME
+      description: Product Name column
+      meta:
+        logical_name: Product Name
+        pii_classification: NONE
+    - name: CATEGORY
+      description: Category column
+      meta:
+        logical_name: Category
+        pii_classification: NONE
+    - name: BRAND
+      description: Brand column
+      meta:
+        logical_name: Brand
+        pii_classification: NONE
+    - name: UNIT_COST
+      description: Unit Cost column
+      meta:
+        logical_name: Unit Cost
+        pii_classification: NONE
+    - name: LIST_PRICE
+      description: List Price column
+      meta:
+        logical_name: List Price
+        pii_classification: NONE
+    - name: INVENTORY_COUNT
+      description: Inventory Count column
+      meta:
+        logical_name: Inventory Count
+        pii_classification: NONE
+    - name: SUPPLIER_NAME
+      description: Supplier Name column
+      meta:
+        logical_name: Supplier Name
+        pii_classification: NONE
+    - name: INGESTION_TIMESTAMP
+      description: Ingestion Timestamp column
+      meta:
+        logical_name: Ingestion Timestamp
+        pii_classification: NONE
+  - name: stg_web_clicks
+    identifier: STG_WEB_CLICKS
+    description: Reverse-engineered Table from snowflake DDL
+    loaded_at_field: INGESTED_TS
+    freshness:
+      warn_after:
+        count: 12
+        period: hour
+      error_after:
+        count: 24
+        period: hour
+    columns:
+    - name: EVENT_ID
+      description: Event Identifier column
+      meta:
+        logical_name: Event Identifier
+        pii_classification: NONE
+    - name: SESSION_ID
+      description: Session Identifier column
+      meta:
+        logical_name: Session Identifier
+        pii_classification: NONE
+    - name: SRC_CUSTOMER_ID
+      description: Source Customer Identifier column
+      meta:
+        logical_name: Source Customer Identifier
+        pii_classification: NONE
+    - name: PAGE_PATH
+      description: Page Path column
+      meta:
+        logical_name: Page Path
+        pii_classification: NONE
+    - name: EVENT_NAME
+      description: Event Name column
+      meta:
+        logical_name: Event Name
+        pii_classification: NONE
+    - name: DEVICE_TYPE
+      description: Device Type column
+      meta:
+        logical_name: Device Type
+        pii_classification: NONE
+    - name: EVENT_TIMESTAMP
+      description: Event Timestamp column
+      meta:
+        logical_name: Event Timestamp
+        pii_classification: NONE
